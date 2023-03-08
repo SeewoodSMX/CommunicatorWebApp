@@ -1,0 +1,8 @@
+*{
+  font-family: roboto;
+  margin: 0;
+  padding: 0;
+}
+body, #root, html{
+  height: 100vh;
+}

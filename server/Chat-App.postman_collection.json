@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "0b8f9e2b-f0aa-4d9a-a160-7d1be9e89b78",
+		"name": "Chat-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24478214"
+	},
+	"item": [
+		{
+			"name": "Rejestracja i logowanie",
+			"item": [
+				{
+					"name": "Rejestracja użytkownika",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1234\",\r\n    \"password\": \"test\",\r\n    \"firstName\": \"Użytkownik\",\r\n    \"lastName\": \"Testowy\",\r\n    \"email\": \"test@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logowanie użytkownika",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"wladzio@test.pl\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kontakty",
+			"item": [
+				{
+					"name": "Pobranie kontaktów użytkownika",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjcwMjM4ODY1LCJleHAiOjE2NzAzMjUyNjV9.aAiWXbyyvKOQBO0rEZFPHPmdGcY57LckdLnCsO67wtk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pobranie kontaktów użytkownika z wyszukiwaniem",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjcwMjM4ODY1LCJleHAiOjE2NzAzMjUyNjV9.aAiWXbyyvKOQBO0rEZFPHPmdGcY57LckdLnCsO67wtk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/contacts?searchValue=seweryn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contacts"
+							],
+							"query": [
+								{
+									"key": "searchValue",
+									"value": "seweryn"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pobranie listy wszystkich użytkowników (ustawiony max 10)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjcwMjM4ODY1LCJleHAiOjE2NzAzMjUyNjV9.aAiWXbyyvKOQBO0rEZFPHPmdGcY57LckdLnCsO67wtk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pobranie listy wszystkich użytkowników (ustawiony max 10) z wyszukiwaniem",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjcwMjM4ODY1LCJleHAiOjE2NzAzMjUyNjV9.aAiWXbyyvKOQBO0rEZFPHPmdGcY57LckdLnCsO67wtk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/users?searchValue=wladzio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "searchValue",
+									"value": "wladzio"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dodanie kontaktu",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjcwMjM4ODY1LCJleHAiOjE2NzAzMjUyNjV9.aAiWXbyyvKOQBO0rEZFPHPmdGcY57LckdLnCsO67wtk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/contacts/5?adDesc=Jakiś krótki opis..",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"contacts",
+								"5"
+							],
+							"query": [
+								{
+									"key": "adDesc",
+									"value": "Jakiś krótki opis.."
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
