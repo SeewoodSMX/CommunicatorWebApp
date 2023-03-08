@@ -16,7 +16,8 @@ export const sendMessage = (data) => {
         socket.emit('sendMessage', data);
     }
 };
-export const responseMessage = (chat, setChat) => {
+export const responseMessage = (chat, setChat, userSelected) => {
+    console.log(userSelected);
     if (socket) {
         socket.on('responseMessage', (data) => {
             data = {
@@ -24,11 +25,20 @@ export const responseMessage = (chat, setChat) => {
                 message: decrypt(data.initVector, data.message),
                 sendDate: new Date(data.sendDate).toLocaleString(),
             };
+
             socket.off('responseMessage');
-            if (chat) {
+
+            console.log(socket.ids);
+            console.log(userSelected);
+            if (chat && userSelected.id === data.senderUserID) {
+                console.log('właściwy chat');
+                setChat([...chat, data]);
+            } else if (chat && socket.id === data.senderUserID) {
+                console.log('mój chat');
                 setChat([...chat, data]);
             } else {
-                setChat([data]);
+                console.log('wiadomość od innego usera');
+                //setChat([data]);
             }
         });
     }

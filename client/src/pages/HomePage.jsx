@@ -27,7 +27,7 @@ export function HomePage() {
     const curUser = context.user;
     //
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [userSelected, setUserSelected] = React.useState(null);
+    const [userSelected, setUserSelected] = React.useState(0);
     const [chat, setChat] = React.useState([]);
     const [usersArray, setUsersArray] = React.useState([]);
     const [viewModel, setViewModel] = React.useState(null);
@@ -63,10 +63,12 @@ export function HomePage() {
         onDeleteOneContact(usersArray, setUsersArray);
         onActiveUser(usersArray, setUsersArray);
     }, [usersArray]);
+    //onResponse
     React.useEffect(() => {
-        responseMessage(chat, setChat);
+        responseMessage(chat, setChat, userSelected, curUser);
         lastMessageRef.current?.scrollIntoView();
-    }, [chat]);
+    }, [chat, userSelected]);
+
     React.useEffect(() => {
         onDeleteMessage(chat, setChat);
     }, [chat]);
@@ -76,7 +78,6 @@ export function HomePage() {
     };
     //wybór usera do chatu (click na drawer)
     const handleUser = (user) => {
-        setUserSelected(user);
         getChat(user);
     };
     //req do serwera - podaj chat w którym biorą udział id: user.id && curUser.id
@@ -93,10 +94,11 @@ export function HomePage() {
                             sendDate: new Date(el.sendDate).toLocaleString(),
                         };
                     });
-
+                    setUserSelected(user);
                     setChat(data);
                     setViewModel('chat');
                 } else {
+                    setUserSelected(user);
                     setChat([]);
                     setViewModel('chat');
                 }
