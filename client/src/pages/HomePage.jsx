@@ -4,8 +4,8 @@ import { useAuth } from '../hooks/useAuth';
 import { Grid } from '@mui/material';
 import ContactsDrawer from '../components/homePage/contactsDrawer/ContactsDrawer';
 import ChatPanel from '../components/homePage/ChatPanel';
-import AppBarMod from '../components/homePage/AppBarMod';
-import { ChangePassword } from '../components/homePage/ChangePassword';
+import AppBarMod from '../components/homePage/appBarMod/AppBarMod';
+import { ChangePassword } from '../components/homePage/appBarMod/ChangePassword';
 import {
     initiateSocketConnection,
     disconnectSocket,
@@ -160,7 +160,6 @@ export function HomePage() {
         setOpenRemindPassword(true);
     };
     const resetPassword = () => {
-        console.log(resetPasswordValue);
         context.resetPassword(resetPasswordValue).then((response) => {
             if (response.status === 200) {
                 disconnectSocket();
