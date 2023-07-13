@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Grid } from '@mui/material';
-import ContactsDrawer from '../components/homePage/ContactsDrawer';
+import ContactsDrawer from '../components/homePage/contactsDrawer/ContactsDrawer';
 import ChatPanel from '../components/homePage/ChatPanel';
 import AppBarMod from '../components/homePage/AppBarMod';
 import { ChangePassword } from '../components/homePage/ChangePassword';
@@ -25,17 +26,16 @@ export function HomePage() {
     //auth i dane usera
     const context = useAuth();
     const curUser = context.user;
-    //
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [userSelected, setUserSelected] = React.useState(0);
-    const [chat, setChat] = React.useState([]);
-    const [usersArray, setUsersArray] = React.useState([]);
-    const [viewModel, setViewModel] = React.useState(null);
-    const [queryResult, setQueryResult] = React.useState(null);
-    //const [isConnected, setIsConnected] = React.useState(false);
-    const [openRemindPassword, setOpenRemindPassword] = React.useState(false);
-    const [resetPasswordValue, setResetPasswordValue] = React.useState('');
-    const lastMessageRef = React.useRef(null);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [userSelected, setUserSelected] = useState({});
+    const [chat, setChat] = useState([]);
+    const [usersArray, setUsersArray] = useState([]);
+    const [viewModel, setViewModel] = useState(null);
+    const [queryResult, setQueryResult] = useState(null);
+    //const [isConnected, setIsConnected] = useState(false);
+    const [openRemindPassword, setOpenRemindPassword] = useState(false);
+    const [resetPasswordValue, setResetPasswordValue] = useState('');
+    const lastMessageRef = useRef(null);
     //pobranie kontaktów usera
     const getContacts = () => {
         context
@@ -48,28 +48,29 @@ export function HomePage() {
             });
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         getContacts();
         if (curUser) {
             initiateSocketConnection(curUser.accessToken);
         }
         return () => {
-            console.log('socket disconnected');
             disconnectSocket();
         };
     }, [curUser]);
-    React.useEffect(() => {
+    useEffect(() => {
         onAddNewContact(usersArray, setUsersArray);
         onDeleteOneContact(usersArray, setUsersArray);
         onActiveUser(usersArray, setUsersArray);
     }, [usersArray]);
     //onResponse
-    React.useEffect(() => {
-        responseMessage(chat, setChat, userSelected, curUser);
-        lastMessageRef.current?.scrollIntoView();
+    useEffect(() => {
+        if (curUser) {
+            responseMessage(chat, setChat, userSelected.id, curUser.id);
+            lastMessageRef.current?.scrollIntoView();
+        }
     }, [chat, userSelected]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         onDeleteMessage(chat, setChat);
     }, [chat]);
     //przełączenie drawera na mobilke
@@ -82,7 +83,6 @@ export function HomePage() {
     };
     //req do serwera - podaj chat w którym biorą udział id: user.id && curUser.id
     const getChat = (user) => {
-        // console.log(user);
         context
             .getChat(user.id)
             .then((response) => {
@@ -170,6 +170,9 @@ export function HomePage() {
             }
         });
     };
+    const handleLogOut = () => {
+        context.logout();
+    };
     return (
         <>
             {!!context.user && (
@@ -179,6 +182,7 @@ export function HomePage() {
                         curUser={curUser}
                         handleSearchInput={handleSearchInput}
                         handleMyAccount={handleMyAccount}
+                        handleLogOut={handleLogOut}
                     ></AppBarMod>
                     <Grid container item sx={{ flexGrow: 1 }}>
                         <Grid container item>

@@ -66,12 +66,11 @@ export const LoginPage = () => {
                 });
         }
     };
-    //Przypomnienie hasło
+    //Przypomnienie hasła
     // const [open, setOpen] = React.useState(false);
     // const handleClose = () => {
     //     setOpen(false);
     // };
-    //DODAĆ FUNKCJE PRZYPOMNIJ HASŁO?
     return (
         <Container component='main' maxWidth='xs'>
             <Box
@@ -96,11 +95,11 @@ export const LoginPage = () => {
                         {isLogin ? 'Logowanie' : 'Rejestracja'}
                     </Typography>
                     <Typography component='p' variant='subtitle1' color='red'>
-                        {!!errorMsg ? (
+                        {!errorMsg ? (
                             errorMsg
-                        ) : !!errorUinUseMsg ? (
+                        ) : !errorUinUseMsg ? (
                             errorUinUseMsg
-                        ) : !!errorEinUseMsg ? (
+                        ) : !errorEinUseMsg ? (
                             errorEinUseMsg
                         ) : (
                             <span>&nbsp;&nbsp;</span>
@@ -115,7 +114,7 @@ export const LoginPage = () => {
                                 margin='normal'
                                 required
                                 fullWidth
-                                error={!!errorUinUseMsg}
+                                error={!errorUinUseMsg}
                                 label='Nazwa Użytkownika'
                                 name='username'
                                 id='username'

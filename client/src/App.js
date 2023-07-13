@@ -3,6 +3,7 @@ import {
     createBrowserRouter,
     createRoutesFromElements,
 } from 'react-router-dom';
+import React from 'react';
 import { LoginPage } from './pages/Login';
 import { HomePage } from './pages/HomePage';
 import { AuthLayout } from './components/AuthLayout';

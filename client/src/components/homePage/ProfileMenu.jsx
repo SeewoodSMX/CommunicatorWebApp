@@ -3,10 +3,8 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { useAuth } from '../../hooks/useAuth';
 export default function MenuAccount(props) {
-    const { logout } = useAuth();
-    const { curUser, handleMyAccount } = props;
+    const { curUser, handleMyAccount, handleLogOut } = props;
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -16,10 +14,7 @@ export default function MenuAccount(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleLogOut = () => {
-        console.log('logout');
-        logout();
-    };
+
     const logOutWrapper = () => {
         handleClose();
         handleLogOut();

@@ -22,7 +22,9 @@ export const useSessionStorage = (keyName, defaultValue) => {
     const setValue = (newValue) => {
         try {
             window.sessionStorage.setItem(keyName, JSON.stringify(newValue));
-        } catch (err) {}
+        } catch (err) {
+            console.log(err);
+        }
         setStoredValue(newValue);
     };
     return [storedValue, setValue];

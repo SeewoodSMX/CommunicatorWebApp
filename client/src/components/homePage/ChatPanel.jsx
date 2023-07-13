@@ -11,8 +11,8 @@ import {
 import { styled } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
 import Message from './Message';
-import ContactExisting from './ContactExisting';
-import ContactNotExisting from './ContactNotExisting';
+import ContactExisting from './contactsDrawer/ContactExisting';
+import ContactNotExisting from './contactsDrawer/ContactNotExisting';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

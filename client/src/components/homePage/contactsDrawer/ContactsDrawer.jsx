@@ -19,11 +19,12 @@ function ContactsDrawer(props) {
                         component='img'
                         sx={{
                             height: 40,
-                            width: 40,
+                            width: 110,
                             ml: 2,
+                            mt: 1,
                         }}
                         alt='Logo'
-                        src='/icons/chat.png'
+                        src='/icons/logoWebChat.png'
                     />
                 </Box>
             </Toolbar>

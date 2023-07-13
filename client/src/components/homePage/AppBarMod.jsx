@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { AppBar, Grid, Toolbar, IconButton } from '@mui/material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import MenuAccount from './MenuAccount';
+import ProfileMenu from './ProfileMenu';
 export default function AppBarMod(props) {
-    const { handleDrawerToggle, curUser, handleSearchInput, handleMyAccount } =
-        props;
+    const {
+        handleDrawerToggle,
+        curUser,
+        handleSearchInput,
+        handleMyAccount,
+        handleLogOut,
+    } = props;
     const searchBar = {
         width: '100%',
         padding: '10px',
@@ -79,10 +84,11 @@ export default function AppBarMod(props) {
                     </Grid>
                 </Grid>
 
-                <MenuAccount
+                <ProfileMenu
                     curUser={curUser}
                     handleMyAccount={handleMyAccount}
-                ></MenuAccount>
+                    handleLogOut={handleLogOut}
+                ></ProfileMenu>
             </Toolbar>
         </AppBar>
     );

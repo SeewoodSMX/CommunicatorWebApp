@@ -9,15 +9,13 @@ export const initiateSocketConnection = (token) => {
             token,
         },
     });
-    console.log('Socket connected');
 };
 export const sendMessage = (data) => {
     if (socket) {
         socket.emit('sendMessage', data);
     }
 };
-export const responseMessage = (chat, setChat, userSelected) => {
-    console.log(userSelected);
+export const responseMessage = (chat, setChat, userSelectedId, curUserId) => {
     if (socket) {
         socket.on('responseMessage', (data) => {
             data = {
@@ -25,21 +23,32 @@ export const responseMessage = (chat, setChat, userSelected) => {
                 message: decrypt(data.initVector, data.message),
                 sendDate: new Date(data.sendDate).toLocaleString(),
             };
-
             socket.off('responseMessage');
+            console.log('curUser ' + curUserId);
+            console.log('userSelected ' + userSelectedId);
+            console.log('data senderUser ' + data.senderUserID);
 
-            console.log(socket.ids);
-            console.log(userSelected);
-            if (chat && userSelected.id === data.senderUserID) {
-                console.log('właściwy chat');
-                setChat([...chat, data]);
-            } else if (chat && socket.id === data.senderUserID) {
-                console.log('mój chat');
-                setChat([...chat, data]);
-            } else {
-                console.log('wiadomość od innego usera');
-                //setChat([data]);
+            if (
+                data.senderUserID === curUserId ||
+                data.senderUserID === userSelectedId
+            ) {
+                if (chat) {
+                    setChat([...chat, data]);
+                } else {
+                    setChat([data]);
+                }
             }
+
+            // if (userSelected.id === data.senderUserID) {
+            //     console.log('właściwy chat');
+            //     setChat([...chat, data]);
+            // } else if (socket.id === data.senderUserID) {
+            //     console.log('mój chat');
+            //     setChat([...chat, data]);
+            // } else {
+            //     console.log('wiadomość od innego usera');
+            //     setChat([data]);
+            // }
         });
     }
 };

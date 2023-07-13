@@ -16,6 +16,4 @@ const UserService = {
     getUserBoard,
 };
 
-//TODO zastanowić się i dopisać co tutaj nam potrzeba
-
 export default UserService;
